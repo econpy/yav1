@@ -2,25 +2,35 @@
 
 This repo currently contains Python scripts for cleaning the raw log files from the [YaV1](https://play.google.com/store/apps/details?id=com.franckyl.yav1) app for Android.
 
-[YaV1]((https://play.google.com/store/apps/details?id=com.franckyl.yav1)), which stands for *Yet Another V1* application, enhances the capabilities of your Valentine One Radar Detector when used in conjunction with the V1Connection Bluetooth adapter, and allows you to tailor its performance to fit your driving style.
-
+The current value-added of these scripts is minimal. As of right now, the scripts are pretty much only useful for cleaning your raw log files. Very soon I will be adding a method to plot this data in a Google Map, so stay tuned.
 
 ### Dependencies ###
 
 * [pandas](https://github.com/pydata/pandas)
 
-
 ### Usage ###
 
-Copy the files in the YaV1 logs folder on your phone to the `rawlogs` folder in this repository.
+After cloning this repo, copy the files in the YaV1 logs folder on your phone to the `rawlogs` folder in this repository. The names of these files will have the structure `YYYY-MM-DD_alert.log`
 
+Then you can clean a single log file (e.g. *rawlogs/2014-02-01_alert.log*) by running:
+```
+python parse_log.py 2014-02-01
+```
+or clean all the logs in your `rawlogs` folder by running:
+```
+python parse_all_logs.py
+```
+The cleaned logs will be created in the `cleanlogs` folder as CSV files. If you want to aggregate all your cleaned log files together into a single file, simply run:
+```
+python agg_logs.py
+```
 
 ### Syncing Data ###
 
 As of right now, there isn't an elegant way of syncing the data being logged by YaV1 to a remote location. Currently, I'm considering one of the following:
 
 1. Use an app like [DropSync](https://play.google.com/store/apps/details?id=com.ttxapps.dropsync) to sync the YaV1 logs folder with a Dropbox folder.
-2. Use a script that runs periodically on the phone to rsync/ssh the changes in the YaV1 log files.
+2. Use a script that runs periodically on the phone to rsync/ssh changes in the YaV1 log files.
 3. Convince the developer of YaV1 to integrate real-time logging to a webserver, similar to what [Torque](https://play.google.com/store/apps/details?id=org.prowl.torque) does.
 
 My ideal solution is #3 as it does not depend on any other apps (as #1 does) or that the user has a rooted phone (as #2 does).
