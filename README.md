@@ -25,6 +25,19 @@ The cleaned logs will be created in the `cleanlogs` folder as CSV files. If you 
 python agg_logs.py
 ```
 
+### What Gets Cleaned? ###
+
+When I say these scripts *clean* your raw log files, I'm referring to the following transformations on the data:
+
+* Convert Unix timestamps into human readable dates
+* Convert frequencies from integers to appropriate floats (e.g. 35519 -> 35.519)
+* Convert direction indicator from (0, 1, 2) to (Front, Rear, Side)
+* Convert flag to more meaningful string
+* Convert speed from meters per second to miles to hour
+
+All of these conversions can be found in the [yav1/logparser.py](https://github.com/econpy/yav1/blob/master/libv1/logparser.py) file.
+
+
 ### Syncing Data ###
 
 As of right now, there isn't an elegant way of syncing the data being logged by YaV1 to a remote location. Currently, I'm considering one of the following:
